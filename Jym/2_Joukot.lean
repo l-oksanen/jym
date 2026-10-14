@@ -1,4 +1,5 @@
-import Mathlib
+import Mathlib.Data.Finset.Powerset
+import Mathlib.Data.Finset.Sort
 
 /-!
 # Harjoitus 2, tehtävät 2(a), 2(d) ja 3(a)

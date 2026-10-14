@@ -1,6 +1,4 @@
-import Mathlib
-
-import Mathlib
+import Mathlib.Algebra.Field.Rat
 
 /-!
 # Harjoitus 3, tehtävä 4 (variaatio)

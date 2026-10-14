@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.Data.Fintype.Basic
 
 /-!
 # Harjoitus 4, tehtävä 2(c) (variaatio)

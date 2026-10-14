@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.Basic.Countable.Defs
 
 /-!
 # Harjoitus 5, tehtävä 1
