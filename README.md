@@ -3,7 +3,7 @@
 Tämä repositorio sisältää kurssin harjoitustehtäviin liittyviä esimerkkejä
 [Lean](https://lean-lang.org)-todistusavustajalla ja
 [Mathlib](https://github.com/leanprover-community/mathlib4)-kirjastolla.
-Osa todistuksista on jätetty kesken (`sorry`), ja ne on tarkoitus täydentää itse.
+Osa todistuksista on jätetty kesken (`sorry`).
 
 ## Esimerkit
 
@@ -27,9 +27,6 @@ Se ei vaadi asennuksia.
    jossa kursori on.
 3. Muokkaa koodia vapaasti, esimerkiksi korvaa `sorry` omalla todistuksellasi.
    Muutokset tarkistetaan saman tien.
-
-Voit myös avata [live.lean-lang.org](https://live.lean-lang.org) suoraan ja
-liittää editoriin minkä tahansa tämän repositorion `.lean`-tiedoston sisällön.
 
 Huomaa, että muutoksia ei tallenneta palvelimelle. Selaimen osoiterivi
 päivittyy muokatessa, joten voit tallentaa tai jakaa työsi kopioimalla
