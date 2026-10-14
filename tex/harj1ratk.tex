@@ -1,0 +1,626 @@
+\documentclass[11pt,a4paper,oneside,notitlepage,final]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amsthm, amssymb}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage[finnish]{babel}
+\usepackage{graphicx}
+\usepackage{transparent}
+\usepackage{pgfplots}
+\usepackage{mdframed}
+\usepackage{comment}
+
+\usepgfplotslibrary{polar}
+\usepgflibrary{shapes.geometric}
+\usetikzlibrary{calc}
+
+\pgfplotsset{my style/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+
+\usepackage[
+textwidth=15.2cm, 
+textheight=24.3cm,
+hmarginratio=1:1,
+vmarginratio=1:1]{geometry}
+
+\setlength{\parskip}{12pt}
+\setlength{\parindent}{0pt}
+
+\setlength{\mathsurround}{0.2pt}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\abs}[1]{ \left| #1 \right| }
+%\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\bigabs}[1]{\bigl\lvert#1\bigr\rvert}
+\newcommand{\biggabs}[1]{\biggl\lvert#1\biggr\rvert}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\ointerv}[1]{\mathopen({#1}\mathclose)}
+%\newcommand{\ocinterv}[1]{\mathopen({#1}\mathclose]}
+\newcommand{\ocinterv}[1]{\left( #1 \right] }
+%\newcommand{\cointerv}[1]{\mathopen[{#1}\mathclose)}
+\newcommand{\cointerv}[1]{\left[ #1 \right)}
+\newcommand{\cinterv}[1]{ \left[ #1 \right] }
+%\newcommand{\cinterv}[1]{\mathopen[{#1}\mathclose]}
+\newcommand{\thalf}{\tfrac{1}{2}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\tint}{\textstyle\int}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+  \raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+\DeclareMathOperator*{\evalop}{\Big/}
+\newcommand{\eval}[2]{\evalop_{\!\!\!\!\!\!#1}^{\,\,\,\,\,\,#2}}
+
+\def\riip{\perp\!\!\!\perp}
+\newcommand{\Tas}{\mathrm{Tas}}
+\newcommand{\Exp}{\mathrm{Exp}}
+\newcommand{\Bin}{\mathrm{Bin}}
+%\newcommand{\Poi}{\mathrm{P}}
+%\newcommand{\Nor}{\mathsf{N}}
+
+% Stochastic independence symbol
+\makeatletter
+\def\indept{\mathchoice
+     {\setbox0\hbox{$\displaystyle\m@th\perp$}\mathrel
+     {\hbox to1.25\wd0{\copy0\hss\box0}}}%
+     {\setbox0\hbox{$\textstyle\m@th\perp$}\mathrel
+     {\hbox to1.25\wd0{\copy0\hss\box0}}}%
+     {\setbox0\hbox{$\scriptstyle\m@th\perp$}\mathrel
+     {\hbox to1.25\wd0{\copy0\hss\box0}}}%
+     {\setbox0\hbox{$\scriptscriptstyle\m@th\perp$}\mathrel
+     {\hbox to1.25\wd0{\copy0\hss\box0}}}}
+\makeatother
+
+\DeclareMathOperator{\Var}{var}
+\DeclareMathOperator{\Cov}{cov}
+\DeclareMathOperator{\Cor}{cor}
+
+\newcommand{\assim}{\underset{\mathit{as}}{\sim}}
+
+\renewcommand{\vec}[1]{{\mathbf{#1}}}
+
+\newcounter{harjnro}
+
+\newenvironment{harjlist}
+  {\begin{list}{\kor{\arabic{harjnro}.}}
+    {\usecounter{harjnro}
+      \setlength{\labelwidth}{0em}
+      \setlength{\labelsep}{0.4em}
+      \setlength{\leftmargin}{0pt}
+      \setlength{\parsep}{5pt}
+      \setlength{\itemindent}{0.4em}
+      \setlength{\topsep}{0.5\parskip}
+      \setlength{\itemsep}{0.75\parskip}
+    }
+  }
+  {\end{list}}
+
+\newenvironment{ratkaisu}{\kor{Ratkaisu} \\}{}
+\newenvironment{arvostelu}{\textit{\kor{Arvosteluohje:}}}{}
+\newenvironment{losning}{\kor{Lösning} \\}{}
+\newenvironment{bedomning}{\textit{\kor{Poängsättningsanvisning:}}}{}
+	
+\newenvironment{kohdat}
+  {\begin{list}{\alph{enumi})}
+    {\usecounter{enumi}
+      \setlength{\labelwidth}{0em}
+      \setlength{\labelsep}{0.5em}
+      \setlength{\leftmargin}{0em}
+      \setlength{\parsep}{3pt}
+      \setlength{\itemindent}{0.5em}
+      \setlength{\topsep}{0pt}
+      \setlength{\itemsep}{0pt}
+    }
+  }
+  {\end{list}}
+
+\newcommand{\kor}[1]{\textbf{#1}}
+
+\newcommand{\kaanna}{\vfill\hfill KÃÃNNÃ!\pagebreak}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{8.0pt plus3.0pt minus4.0pt}
+\setlength{\abovedisplayshortskip}{0.0pt plus3.0pt}
+\setlength{\belowdisplayskip}{8.0pt plus3.0pt minus4.0pt}
+\setlength{\belowdisplayshortskip}{7.0pt plus3.0pt minus3.0pt}
+
+{
+\kor{Johdatus yliopistomatematiikkaan, syksy 2026\\
+Helsingin yliopisto, Matematiikan ja tilastotieteen osasto \\
+Harjoitus 1 -- Ratkaisuehdotukset ja pisteytysohjeet}\\
+%
+}
+
+{\bf Muistutuksena, että yleisohjeena tehtävien pisteytyksessä toimivat seuraavat kuvaukset:
+
+0 pistettä: Ei vastausta tai vastauksessa ei ole lainkaan oikean ratkaisun elementtejä
+
+1 piste: Vastauksessa on ainakin jokin elementti oikeasta ratkaisusta
+
+2 pistettä: Vastaus on pääosin oikein
+
+Huomaa! Mikäli et anna jostakin tehtävästä täysiä pisteitä, perustele ratkaisusi tekstikenttään!
+
+Useamman alakohdan sisältävissä tehtävissä kahteen pisteeseen vaaditaan, että jokaisen kohdan tulee olla tehtynä kahden pisteen arvoisesti, ellei tarkentavissa pisteytysohjeissa toisin mainita.
+
+Muista, että vertaisarvioinneista saatavat pisteet jaetaan ainoastaan riittävän huolellisesti tehdyistä arvioista.}
+
+\begin{harjlist}
+
+%Tehtävä 1
+\item[1.] Osoita induktiolla, että 
+\[
+1^3+2^3+3^3+\cdots+n^3=\left(\frac{n(n+1)}{2}\right)^2\quad\text{kaikilla}\ n\in\N,\ n\geqslant 1.
+\]
+
+\vspace{0.4cm}
+\ratkaisu
+Todistetaan väite ensimmäisellä induktioperiaatteella.
+
+Alkuaskel. Kun $n=1$, niin kaava pätee muodossa $\displaystyle 1^3=1=\left(\frac{1\cdot(1+1)}{2}\right)^2$.
+
+Induktioaskel. Teemme induktio-oletuksen, että $k\ge 1$ ja kaava pätee kun $n=k$, toisin sanoen
+\[
+1^3+2^3+3^3+\cdots+k^3=\left(\frac{k(k+1)}{2}\right)^2.
+\]
+Induktio-oletuksen perusteella saamme nyt arvolla $n=k+1$, että
+\begin{align*}
+&1^3+2^3+\cdots+k^3+(k+1)^3\overset{\text{i.o.}}{=}\left(\frac{k(k+1)}{2}\right)^2+(k+1)^3\\
+&=\left(\frac{k(k+1)}{2}\right)^2+(k+1)(k+1)^2=\frac{k^2(k+1)^2}{4}+\frac{4(k+1)(k+1)^2}{4}\\
+&=\frac{(k^2+4k+4)(k+1)^2}{4}=\frac{(k+2)^2(k+1)^2}{4}=\left(\frac{(k+1)(k+2)}{2}\right)^2.
+\end{align*}
+Näin on induktioväite, eli yhtälön päteminen kun $n=k+1$, osoitettu oikeaksi.\qed
+
+\textbf{Huom!} Induktion voi esittää myös tutkimalla joukkoa $A=\{n\in \N\setminus\{0\} \mid 1^3+\cdots+n^3=(\frac{n(n+1)}{2})^2\}$. Tällöin alkuaskeleena osoitetaan $1\in A$ 
+ja induktio-askeleena, että $n\in A$ implikoi $n+1\in A$.  Vastaavasti muissakin tehtävissä.
+
+\arvostelu \
+Mikäli todistus on oikein tai induktiotodistuksen idea on ymmärretty oikein, mutta esityksessä on
+vähäisiä puutteita, niin kaksi pistettä. Yksi piste, jos alkuaskel on tehty oikein ja 
+induktioaskelta on yritetty. Muuten nolla pistettä.
+
+% Tehtävä 2
+\item[2.] Osoita induktiolla, että jos $n\in\N$, niin $n^3-n$ on jaollinen kuudella.
+
+\vspace{0.4cm}
+\ratkaisu
+Todistetaan väite ensimmäisellä induktioperiaatteella.
+
+Alkuaskel. Kun $n=1$, niin $1^3-1=0$ on jaollinen kuudella. 
+
+Induktioaskel. Teemme induktio-oletuksen, että että $k\ge 1$ ja väite pätee arvolla $n=k$, toisin 
+sanoen $k^3-k$ on jaollinen kuudella. Tämä merkitsee sitä, että $k^3-k=6s$ jollakin $s\in\N$.
+Koska $k$ tai $k+1$ on parillinen, niin $k(k+1)$ on parillinen ja näin ollen $k(k+1)=2t$ 
+jollakin $t\in\N$. Induktio-oletuksen perusteella arvolla $n=k+1$ saadaan
+\begin{align*}
+(k+1)^3-(k+1)&=k^3+3k^2+3k+1-k-1=k^3+3k^2+2k\\
+&=k^3-k+3k^2+3k\overset{\text{i.o.}}{=}6s+3k(k+1)\\
+&=6s+3\cdot 2t=6(s+t),
+\end{align*}
+joka on jaollinen kuudella. Näin on induktioväite (luku $n^3-n$ on jaollinen kuudella, kun $n=k+1$) 
+osoitettu oikeaksi.\qed
+
+\arvostelu \
+Mikäli todistus on oikein tai induktiotodistuksen idea on ymmärretty oikein, mutta esityksessä on
+vähäisiä puutteita, niin kaksi pistettä. Yksi piste, jos alkuaskel on tehty oikein ja 
+induktioaskelta on yritetty. Muuten nolla pistettä.
+
+%Tehtävä 3
+\item[3.] Osoita induktiolla, että 
+\[
+1\cdot 1!+2\cdot 2!+3\cdot 3!+\cdots+n\cdot n!=(n+1)!-1\quad\text{kaikilla}\ n\in\N,\ n\geqslant 1.
+\]
+
+\vspace{0.4cm}
+\ratkaisu
+Todistetaan väite ensimmäisellä induktioperiaatteella.
+
+Alkuaskel. Kun $n=1$, niin kaava pätee muodossa $1\cdot 1!=1=2-1=(1+1)!-1$.
+
+Induktioaskel. Teemme induktio-oletuksen, että $k\ge 1$ ja kaava pätee kun $n=k$, toisin sanoen
+\[
+1\cdot 1!+2\cdot 2!+3\cdot 3!+\cdots+k\cdot k!=(k+1)!-1
+\]
+Induktio-oletuksen perusteella saamme nyt arvolla $n=k+1$, että
+\begin{align*}
+&1\cdot 1!+2\cdot 2!+\cdots+k\cdot k!+(k+1)\cdot(k+1)!\\
+&\overset{\text{i.o.}}{=}(k+1)!-1+(k+1)\cdot(k+1)!=(k+2)(k+1)!-1\\
+&=((k+1)+1)(k+1)!-1.
+\end{align*}
+Näin on induktioväite, eli yhtälön päteminen kun $n=k+1$, osoitettu oikeaksi.\qed
+
+\arvostelu \
+Mikäli todistus on oikein tai induktiotodistuksen idea on ymmärretty oikein, mutta esityksessä on
+vähäisiä puutteita, niin kaksi pistettä. Yksi piste, jos alkuaskel on tehty oikein ja 
+induktioaskelta on yritetty. Muuten nolla pistettä.
+
+%Tehtävä 4
+\item[4.] Me
+''todistamme'', että kaikki koirat ovat samanvärisiä induktion avulla.
+Tarkastellaan ensin yhtä koiraa. Se on selvästi samanvärinen itsensä kanssa, joten ryhmässä, jossa on yksi koira, pätee että kaikki koirat ovat samanvärisiä.
+Teemme induktio-oletuksen, että $n = k$ koiraa on samanvärisiä. Todistetaan, että silloin
+myös $k + 1$ koiraa on samanvärisiä.
+Tarkastellaan ryhmää, jossa on $k+1$ koiraa. Tästä ryhmästä voidaan poistaa yksi koira,
+jolloin jäljelle jää $k$ koiraa. Induktio-oletuksen mukaan nämä $k$ koiraa ovat samanvärisiä.
+Palautetaan poistettu koira alkuperäiseen ryhmään ja poistetaan siitä jokin toinen koira.
+Jälleen jäljelle jää $k$ koiraa ja niiden täytyy olla samanvärisiä. Mutta nyt myös ryhmästä
+poistetut koirat täytyy olla samanvärisiä näiden kanssa, ja siten kaikkien $k+1$ koiran täytyy
+olla samanvärisiä.
+Tästä seuraa, että kaikkien koirien täytyy olla samanvärisiä.
+Missä on virhe?
+
+\vspace{0.4cm}
+\ratkaisu
+Tässä ''todistuksessa'' on oleellista huomata, mitä ominaisuuksia luku $k$ voi toteuttaa. 
+Aluksi on todettu, että yksi koira on itsensä kanssa samanvärinen ja toisaalta
+voidaan todeta, että nollan koiran joukossa kaikki koirat ovat samanvärisiä. 
+Tätä suuremmista koiramääristä ei tiedetä vielä mitään, kun tarkastellaan $k+1$ koiraa.
+Kuitenkin todistuksessa oletetaan, että $k + 1 \ge 3$. Havaitaan, että ongelmia aiheutuu, 
+kun $k + 1 = 2$. ''Todistuksessa'' ensin poistetaan joukosta yksi koira ja jäljelle 
+jäänyt koira on tietenkin itsensä kanssa samanvärinen. Poistettu koira palautetaan 
+joukkoon ja toinen koira poistetaan joukosta. Edelleen joukkoon jäänyt koira on 
+itsensä kanssa samanvärinen, mutta ei välttämättä samanvärinen kuin poistettu koira. 
+Näin ollen yllä olevaa päättelyä ei voida tehdä kaikilla mahdollisilla luvun $k+1$ 
+arvoilla. Selvästikään kaksi satunnaisesti valittua koiraa eivät välttämättä ole 
+samanväriset! 
+
+\arvostelu \
+Yksi piste todistuksen virheen mielekkäästä pohdinnasta, toinen piste ansiokkaasta pohdinnasta 
+(ongelmia silloin kun $k+1=2$).
+
+%Tehtävä 5
+\item[5.] 
+%Määritä luvut $n\in\N$, joilla pätee $3^n\leqslant 3n+1$. Todista väitteesi. Hyödynnä induktiota.
+Tutkitaa kolmea väitettä, kun $n\in \N$. 
+\begin{enumerate}
+\item[(1)]
+$n$ on jaollinen neljällä, jos $n$ on jaollinen kahdella.
+\item[(2)]
+Jos $n$ on jaollinen neljällä, niin $n$ on jaollinen kahdella.
+\item[(3)]
+$n$ on jaollinen neljällä, jos ja vain jos $n$ on jaollinen kahdella.
+\end{enumerate}
+Erittele kunkin väitteen oletus ja johtopäätös. Tutki väitteiden paikkansapitävyyttä. 
+Käytä jaollisuuden määritelmää todistuksissasi ja vastaesimerkeissäsi.
+
+\vspace{0.4cm}
+\ratkaisu
+(1) Väitteen oletus on, että $n$ on jaollinen kahdella, ja johtopäätös on, että 
+$n$ on jaollinen neljällä. Väite ei ole totta. Esimerkiksi luku $6\in\N$ on jaollinen
+kahdella, koska $6=2\cdot 3$, mutta se ei ole jaollinen neljällä, koska ei ole
+olemassa lukua $b\in\N$, jolla $6=4\cdot b$.
+
+(2) Väitteen oletus on, että $n$ on jaollinen neljällä, ja johtopäätös on, että 
+$n$ on jaollinen kahdella. Väite on totta. Jos $n\in\N$ on jaollinen neljällä, niin
+on olemassa luku $b\in\N$, jolla $n=4\cdot b$. Tällöin $n=2\cdot 2\cdot b$, missä
+$2\cdot b\in\N$, joten määritelmän mukaan $n$ on jaollinen kahdella.
+
+(3) Väitteessä on kaksi oletusta ja kaksi johtopäätöstä, molempien kohtien (1) ja
+(2) oletukset ja johtopäätökset. Väite ei ole totta samasta syystä kuin kohta (1) ei
+ole totta.
+
+\arvostelu \
+Jos yksi kohdista on tehty oikein, niin yksi piste. Jos kaikki kolme kohtaa ovat oikein,
+niin kaksi pistettä. Jos kaikista kohdista on tunnistettu oletukset ja johtopäätökset, 
+niin tästä yksi piste, jos ei muita pisteitä. Jos kaikkien kohtien todistus oikein,
+niin tästä yksi piste, jos ei muita pisteitä.
+
+\begin{comment}
+Tarkastellaan epäyhtälön toteutumista pienillä $n$:n arvoilla.
+
+Kun $n=0$, niin $3^0=1=0+1=3\cdot 0+1$, joten epäyhtälö pätee (yhtälönä).
+
+Kun $n=1$, niin $3^1=3\le 4=3+1=3\cdot 1+1$, joten epäyhtälö pätee.
+
+Kun $n=2$, niin $3^2=9\not\le 7=6+1=3\cdot 2+1$, joten epäyhtälö ei päde.
+
+Kun $n=3$, niin $3^3=27\not\le 10=9+1=3\cdot 3+1$, joten epäyhtälö ei päde.
+
+Vaikuttaa siis siltä, että epäyhtälö pätee vain $n$:n arvoilla $0$ ja $1$ ja 
+$3^n>3n+1$ kaikilla $n\ge 2$. 
+
+Osoitetaan induktiolla, että $3^n>3n+1$, kun $n\ge 2$. 
+
+Alkuaskel. Kun $n=2$, niin $3^2=9>7=6+1=3\cdot 2+1$.
+
+Induktioaskel. Teemme induktio-oletuksen, että $k\ge 2$ ja epäyhtälö pätee kun $n=k$, toisin sanoen
+$3^k>3k+1$. Tällöin
+\begin{align*}
+3^{k+1}=3\cdot 3^k\overset{\text{i.o.}}{>}3(3k+1)=9k+3=3(k+1)+6k>3(k+1)+1,
+\end{align*}
+sillä $6k\ge 12$.
+Näin on induktioväite, eli yhtälön päteminen kun $n=k+1$, osoitettu oikeaksi.\qed
+
+On siis osoitettu, että kun tarkastellaan lukuja $n\in\N$, niin epäyhtälö $3^n\leqslant 3n+1$ pätee vain, kun $n=0$ tai $n=1$.
+
+\arvostelu \
+Jos on tarkistanut, että epäyhtälö pätee arvoilla $n=0$ ja $n=1$, mutta ei päde joillakin
+arvoilla (vähintään kahdella) $n\ge 2$, niin yksi piste. Jos on todistanut induktiolla pääpiirteittäin oikein, että 
+$3^n>3n+1$, kun $n\ge 2$, niin toinen piste.
+\end{comment}
+
+%Tehtävä 6
+\item[6.] Määritellään lukujono $(z_n)$ rekursiivisesti
+\begin{align*}
+z_0&=1,\quad z_1=2,\\
+z_{n+1}&=z_n+2z_{n-1},\quad n\geqslant 1.
+\end{align*}
+\begin{enumerate}
+\item[(a)] Määritä ensin lukujonon 8 ensimmäistä lukua. Esitä sitten $z_n$ pelkän $n$:n avulla eli
+ratkaise rekursiivinen yhtälö lukujonon ensimmäisten lukujen perusteella päättelemällä. 
+\item[(b)] Todista kohdassa (a) päättelemäsi rekursiivisen yhtälön ratkaisu $z_n$ oikeaksi
+induktiolla.
+\end{enumerate}
+
+\vspace{0.4cm}
+\ratkaisu
+\begin{enumerate}
+\item[(a)] Määritetään lukujonon 8 ensimmäistä lukua laskemalla määritelmästä lähtien, 
+kun $z_{n+1}=z_n+2z_{n-1}$:
+\begin{align*}
+z_0&=1,\\
+z_1&=2,\\
+z_2&=2+2\cdot 1=4,\\
+z_3&=4+2\cdot 2=8,\\
+z_4&=8+2\cdot 4=16,\\
+z_5&=16+2\cdot 8=32,\\
+z_6&=32+2\cdot 32=64,\\
+z_7&=64+2\cdot 32=128.
+\end{align*}
+Huomataan, että esimerkiksi 
+$z_2=4=2^2$, $z_4=16=2^4$ ja $z_6=64=2^6$.\\
+
+Näyttää siis siltä, että $z_n=2^n$, $n\in \N$\\
+
+\item[(b)] Todistetaan kohdassa (a) päätelty tulos oikeaksi jokaisella $n$:n arvolla induktion avulla.
+
+Alkuaskel: Kun $n=0$, niin $z_0=1=2^0$, ja kun $n=1$, niin $z_1=2=2^1$. Alkuaskel siis pätee. 
+
+Induktioaskel: Oletetaan, että $n\geq 1$ ja $z_k=2^k$ kaikilla $k\le n$. Erityisesti tällöin $z_{n-1}, z_{n}$ ovat määriteltyjä ja 
+\begin{align*}
+z_{n-1}&=2^{n-1},\\
+z_{n}&=2^{n}.
+\end{align*}
+
+Tästä ja lukujonon määritelmästä seuraa, että
+$$z_{n+1}=z_{n}+2 z_{n-1}=2^n+2\cdot 2^{n-1}=2^{n}+2^{n}=2\cdot 2^{n}=2^{n+1}.$$
+
+Väite on siis osoitettu toisella induktioperiaatteella.\qed
+
+\end{enumerate}
+
+\arvostelu \
+Molemmista kohdista (a) ja (b) yksi piste. Kahteen pisteeseen vaaditaan molemmat kohdat
+oikein pieniä virheitä lukuunottamatta. Jos kumpikaan kohta ei ole oikein, mutta molempia
+kohtia on yritetty järkevästi, niin yksi piste.
+
+\end{harjlist}
+
+\newpage
+
+{
+\kor{Inledning till universitetsmatematik, hösten 2026 \\
+Helsingfors universitet, Avdelningen för matematik och statistik \\
+Övning 1 -- Lösningsförslag och poängsättningsanvisningar}\\
+%
+}
+
+{\bf Kom ihåg att följande beskrivningar fungerar som allmänna anvisningar för poängsättningen:
+
+0 poäng: Inget svar eller svaret har inga drag av en korrekt lösning
+
+1 poäng: Svaret har i alla fall något drag av en korrekt lösning
+
+2 poäng: Svaret är huvudsakligen korrekt
+
+Obs! Om du inte ger fulla poäng för någon uppgift bör du motivera detta i kommentarsfältet!
+
+
+För uppgifter med flera delmoment krävs det för två poäng att varje del är utförd på en tvåpoängsnivå, om inte annat anges i de detaljerade poängsättningsanvisningarna.
+
+Kom ihåg att poäng från kamratbedömningar ges endast för tillräckligt noggrant utförda bedömningar.}
+
+\begin{harjlist}
+
+% Tehtävä 1
+\item[1.] Visa med induktion att  
+\[
+1^3+2^3+3^3+\cdots+n^3=\left(\frac{n(n+1)}{2}\right)^2\quad\text{för alla}\ n\in\N,\ n\geqslant 1.
+\]
+
+\vspace{0.4cm}
+\losning \
+Vi bevisar påståendet med hjälp av den första induktionsprincipen.
+
+Bassteg. När $n=1$, gäller formeln i formen $\displaystyle 1^3=1=\left(\frac{1\cdot(1+1)}{2}\right)^2$.
+
+Induktionssteg. Vi gör induktionsantagandet att formeln gäller för $n=k \ge 1$, det vill säga
+\[
+1^3+2^3+3^3+\cdots+k^3=\left(\frac{k(k+1)}{2}\right)^2
+\]
+gäller.
+
+Vi granskar vänstra ledet av formeln för värdet $n = k+1$ och använder oss av induktionsantagandet för att få
+\begin{align*}
+&1^3+2^3+\cdots+k^3+(k+1)^3\overset{\text{i.a.}}{=}\left(\frac{k(k+1)}{2}\right)^2+(k+1)^3\\
+&=\left(\frac{k(k+1)}{2}\right)^2+(k+1)(k+1)^2=\frac{k^2(k+1)^2}{4}+\frac{4(k+1)(k+1)^2}{4}\\
+&=\frac{(k^2+4k+4)(k+1)^2}{4}=\frac{(k+2)^2(k+1)^2}{4}=\left(\frac{(k+1)(k+2)}{2}\right)^2.
+\end{align*}
+Således har induktionspåståendet, det vill säga att formeln gäller för $n=k+1$, bevisats.\qed
+
+\textbf{Obs!} Induktion kan också formuleras med hjälp av mängden $A=\{n\in \N \setminus\{0\}\mid 1^3+\cdots+n^3=(\frac{n(n+1)}{2})^2\}$. Då visar man som bassteg att $1\in A$ och som induktionssteg att $n\in A$ medför $n+1\in A$. På motsvarande sätt även i andra uppgifter.
+
+\bedomning \
+Om beviset är korrekt eller om idén bakom induktionsbeviset är förstådd, men presentationen har mindre brister, kan man ge två poäng. Ett poäng ges om bassteget är korrekt utfört och det finns ett försök på induktionssteget, annars noll poäng.
+
+%Tehtävä 2
+\item[2.] Visa med induktion att om $n\in\N$, så är $n^3-n$ delbart med sex.
+
+\vspace{0.4cm}
+\losning \
+Vi bevisar påståendet med hjälp av den första induktionsprincipen.
+
+Bassteg. När $n=1$, så är $1^3-1=0$ delbart med sex.
+
+Induktionssteg. Vi gör induktionsantagandet att påståendet gäller för $n=k \geq 1$, det vill säga att $k^3-k$ är delbart med sex. Detta betyder att $k^3-k=6s$ för något $s\in\mathbb{N}$.
+Eftersom antingen $k$ eller $k+1$ är jämn, så är $k(k+1)$ jämnt och således $k(k+1)=2t$ för något $t\in\mathbb{N}$. Utifrån induktionsantagandet, får vi för värdet $n=k+1$ att
+\begin{align*}
+(k+1)^3-(k+1)&=k^3+3k^2+3k+1-k-1=k^3+3k^2+2k\\
+&=k^3-k+3k^2+3k \overset{\text{i.a.}}{=} 6s + 3k(k+1)\\
+&=6s + 3\cdot 2t = 6(s+t),
+\end{align*}
+vilket är delbart med sex. Således har induktionspåståendet (att $n^3-n$ är delbart med sex när $n=k+1$) bevisats vara korrekt.\qed
+
+
+\bedomning \
+Om beviset är korrekt eller om idén bakom induktionsbeviset är förstådd, men presentationen har mindre brister, kan man ge två poäng. Ett poäng ges om bassteget är korrekt utfört och det finns ett försök på induktionssteget, annars noll poäng.
+
+
+%Tehtävä 3
+\item[3.] Visa med induktion att  
+\[
+1\cdot 1!+2\cdot 2!+3\cdot 3!+\cdots+n\cdot n!=(n+1)!-1\quad\text{för alla}\ n\in\N,\ n\geqslant 1.
+\]
+
+\vspace{0.4cm}
+\losning \
+Vi bevisar påståendet med hjälp av den första induktionsprincipen.
+
+Bassteg. När $n=1$, så gäller formeln i formen $1\cdot 1!=1=2-1=(1+1)!-1$.
+
+Induktionssteg. Vi gör induktionsantagandet att formeln gäller för $n=k \geq 1$, det vill säga
+\[
+1\cdot 1!+2\cdot 2!+3\cdot 3!+\cdots+k\cdot k!=(k+1)!-1.
+\]
+Utifrån induktionsantagandet får vi nu för värdet $n=k+1$ att
+\begin{align*}
+&1\cdot 1!+2\cdot 2!+\cdots+k\cdot k!+(k+1)\cdot(k+1)!\\
+&\overset{\text{i.a.}}{=}(k+1)!-1+(k+1)\cdot(k+1)!=(k+2)(k+1)!-1\\
+&=((k+1)+1)(k+1)!-1.
+\end{align*}
+Således har induktionspåståendet, det vill säga ekvationens giltighet när $n=k+1$, bevisats.\qed
+
+
+\bedomning \
+Om beviset är korrekt eller om idén bakom induktionsbeviset är förstådd, men presentationen har mindre brister, kan man ge två poäng. Ett poäng ges om bassteget är korrekt utfört och det finns ett försök på induktionssteget, annars noll poäng.
+
+
+%Tehtävä 4
+\item[4.] Vi ''bevisar'' att
+alla hundar är av samma färg med hjälp av induktion. Låt oss först betrakta en hund. Den
+är tydligt lika sig själv, så i en grupp med en hund gäller att alla hundar är av samma färg.
+Vi gör induktionsantagandet att $n = k$ stycken hundar är av samma färg. Låt oss bevisa att
+då är $k+1$ hundar av samma färg. Betrakta en grupp med $k+1$ hundar. Från denna grupp
+kan vi ta bort en hund och det återstår $k$ hundar. Enligt induktionsantagandet är dessa $k$
+hundar av samma färg. Vi återför den borttagna hunden till den ursprungliga gruppen och
+tar bort en annan hund från gruppen. Återigen återstår $k$ hundar och dessa måste vara av
+samma färg. Men nu måste även de hundar som tagits bort från gruppen vara av samma
+färg och därmed måste alla $k + 1$ hundar vara av samma färg. Därav följer att alla hundar
+måste vara av samma färg. Var ligger felet?
+
+
+\vspace{0.4cm}
+\losning \
+I detta "bevis" är det väsentligt att uppmärksamma vilka egenskaper talet $k$ kan uppfylla. Först har det konstaterats att en hund är av samma färg som sig själv, och å andra sidan kan man konstatera att i en grupp med noll hundar är alla hundar av samma färg. För större mängder hundar vet vi ännu inget när vi betraktar $k+1$ hundar. 
+
+Dock antas det i beviset att $k + 1 \geq 3$. Vi observerar att problem uppstår när $k + 1 = 2$. I beviset tas först bort en hund från gruppen, och den återstående hunden är naturligtvis av samma färg som sig själv. Den borttagna hunden återförs till gruppen och en annan hund tas bort. Den kvarvarande hunden är fortfarande av samma färg som sig själv, men den är inte nödvändigtvis av samma färg som den borttagna hunden. 
+
+Detta visar att den ovanstående slutsatsen inte kan göras för alla möjliga värden av $k + 1$. Självklart är två slumpmässigt valda hundar inte nödvändigtvis av samma färg!
+
+
+
+\bedomning \
+Ett poäng för en meningsfull reflektion över felet i beviset och ett poäng för en grundlig diskussion (det finns problem för fallet $k+1=2$).
+
+%Tehtävä 5
+\item[5.] 
+%Bestäm för vilka tal $n\in\N$ gäller $3^n\leqslant 3n+1$. Bevisa ditt påstående. Använd induktion.
+Undersök tre påståenden, då $n\in \N$. 
+\begin{enumerate}
+\item[(1)]
+$n$ är delbart med fyra om $n$ är delbart med två.
+\item[(2)]
+Om $n$ är delbart med fyra, så är $n$ delbart med två.
+\item[(3)]
+$n$ är delbart med fyra om och endast om $n$ är delbart med två.
+\end{enumerate}
+Specificera antagandet och slutsatsen i varje påstående. Undersök påståendenas giltighet.
+Använd definitionen av delbarhet i dina bevis och motexempel.
+
+\vspace{0.4cm}
+\losning \
+\begin{enumerate}
+\item[(1)] Antagandet i påståendet är att $n$ är delbart med två och slutsatsen är att $n$ är delbart med fyra. Påståendet är inte sant. Till exempel, talet $6 \in \mathbb{N}$ är delbart med två, eftersom $6=2\cdot 3$, men det är inte delbart med fyra, eftersom det inte finns något heltal $b \in \mathbb{N}$ sådant att $6=4\cdot b$.
+
+\item[(2)] Antagandet i påståendet är att $n$ är delbart med fyra, och slutsatsen är att $n$ är delbart med två. Påståendet är sant. Om $n \in \mathbb{N}$ är delbart med fyra, så finns det ett heltal $b \in \mathbb{N}$ såsom $n=4\cdot b$. Därmed kan vi skriva $n=2\cdot 2\cdot b$, där $2\cdot b \in \mathbb{N}$. Enligt definitionen är $n$ därför delbart med två.
+
+\item[(3)] I påståendet finns två antaganden och två slutsatser, nämligen antagandena och slutsatserna från både punkt (1) och punkt (2). Påståendet är inte sant av samma anledning som punkt (1) inte är sann.
+\end{enumerate}
+
+
+\bedomning \
+Om en av punkterna är korrekt utförd, ges ett poäng. Om alla tre punkterna är korrekta, ges två poäng. Om antaganden och slutsatser har identifierats i alla punkter, ges ett poäng om inga andra poäng ges. Om bevisen för alla punkter är korrekta, ges ett poäng om inga andra poäng ges.
+
+
+%Tehtävä 6
+\item[6.] Definiera talföljden $(z_n)$ rekursivt genom 
+\begin{align*}
+z_0&=1,\quad z_1=2,\\
+z_{n+1}&=z_n+2z_{n-1},\quad n\geqslant 1.
+\end{align*}
+\begin{enumerate}
+\item[(a)] Bestäm först de 8 första talen i talföljden. Presentera därefter  $z_n$ enbart med hjälp av  $n$, det vill säga, härled en lösning av  den rekursiva ekvationen 
+på basen av de första talen i talföljden.
+\item[(b)] Bevisa med induktion att den härledda lösningen $z_n$  från del (a) av den rekursiva ekvationen 
+är  korrekt. 
+\end{enumerate}
+
+\vspace{0.4cm}
+\losning \
+\begin{enumerate}
+\item[(a)] Bestäm de första åtta termerna i talföljden genom att räkna ut dem från definitionen, då $z_{n+1}=z_n+2z_{n-1}$:
+\begin{align*}
+z_0&=1,\\
+z_1&=2,\\
+z_2&=2+2\cdot 1=4,\\
+z_3&=4+2\cdot 2=8,\\
+z_4&=8+2\cdot 4=16,\\
+z_5&=16+2\cdot 8=32,\\
+z_6&=32+2\cdot 16=64,\\
+z_7&=64+2\cdot 32=128.
+\end{align*}
+Vi noterar att till exempel 
+$z_2=4=2^2$, $z_4=16=2^4$ och $z_6=64=2^6$.\\
+
+Det verkar således som om $z_n=2^n$, för $n\in \mathbb{N}$.
+
+\item[(b)] Vi bevisar att det härledda resultatet från del (a) gäller för varje värde av $n$ genom induktion.
+
+Bassteg: När $n=0$, så är $z_0=1=2^0$, och när $n=1$, så är $z_1=2=2^1$. Bassteget gäller alltså. 
+
+Induktionssteg: Antag att $n\geq 1$ och att $z_k=2^k$ för alla $k\le n$. Speciellt är då $z_{n-1}, z_{n}$ definierade och 
+\begin{align*}
+z_{n-1}&=2^{n-1},\\
+z_{n}&=2^{n}.
+\end{align*}
+
+Från det här och utifrån definitionen av talföljden följer det att
+$$z_{n+1}=z_{n}+2 z_{n-1}=2^n+2\cdot 2^{n-1}=2^{n}+2^{n}=2\cdot 2^{n}=2^{n+1}.$$
+
+Påståendet har således bevisats med hjälp av den andra induktionsprincipen.\qed
+
+\end{enumerate}
+
+\bedomning \
+Ett poäng för varje del (a) och (b). Två poäng ges om båda delarna är korrekta, bortsett från små fel. Om ingen del är korrekt, men båda delarna har rimliga försök, ges ett poäng.
+
+\end{harjlist}
+
+\end{document}
