@@ -1,5 +1,4 @@
-import Mathlib.Algebra.Ring.Int.Defs
-import Mathlib.Tactic.Use
+import Mathlib
 
 /-!
 # Harjoitus 1, tehtävä 2

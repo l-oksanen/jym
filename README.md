@@ -31,15 +31,9 @@ Se ei vaadi asennuksia.
 Voit myös avata [live.lean-lang.org](https://live.lean-lang.org) suoraan ja
 liittää editoriin minkä tahansa tämän repositorion `.lean`-tiedoston sisällön.
 
-Huomioita:
-
-- Muutoksia ei tallenneta palvelimelle. Selaimen osoiterivi päivittyy
-  muokatessa, joten voit tallentaa tai jakaa työsi kopioimalla osoitteen.
-  Pidemmät työt kannattaa tallentaa myös omalle koneelle.
-- Selainversio käyttää Mathlibin uusinta versiota, kun taas tämä projekti on
-  lukittu tiettyyn versioon. Jos selaimessa tulee virhe esimerkiksi
-  `import`-rivistä, kokeile korvata tiedoston `import`-rivit rivillä
-  `import Mathlib`.
+Huomaa, että muutoksia ei tallenneta palvelimelle. Selaimen osoiterivi
+päivittyy muokatessa, joten voit tallentaa tai jakaa työsi kopioimalla
+osoitteen. Pidemmät työt kannattaa tallentaa myös omalle koneelle.
 
 ## Leanin asentaminen omalle koneelle (VS Code)
 
