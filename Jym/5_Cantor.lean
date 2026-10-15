@@ -7,7 +7,7 @@ import Mathlib
 
 Osoita, että äärettömien bittijonojen joukko on ylinumeroituva.
 
-Ääretön bittijono on funktio ℕ → Bool: jonon n:s bitti on s(n).
+Ääretön bittijono on funktio f : ℕ → Bool. Jonon n:s bitti on f(n).
 Bool = {true, false} vastaa bittejä 1 ja 0.
 -/
 
